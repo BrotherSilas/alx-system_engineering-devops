@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# Requirement says get Apache to run on container 
+# and return a page containing Hello Holberton
+
+apt-get update
+apt-get install -y apache2
+service apache2 start
+echo "Hello Holberton" > /var/www/html/index.html
