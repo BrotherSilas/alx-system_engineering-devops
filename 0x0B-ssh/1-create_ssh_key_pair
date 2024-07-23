@@ -3,3 +3,4 @@
 
 # bits-4096, private_key_storage_file-school, passphrase-"betty"
 ssh-keygen -f school -b 4096 -N "betty"
+
