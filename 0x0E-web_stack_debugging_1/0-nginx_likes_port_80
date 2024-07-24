@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 # Check if Nginx is listening on port 80
 nginx_status=$(netstat -tuln | grep ':80 ')
 
