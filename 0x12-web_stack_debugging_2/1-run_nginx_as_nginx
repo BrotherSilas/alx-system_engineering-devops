@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# Configure Nginx to run as nginx user and listen on port 8080
+
+# Change nginx user in nginx.conf
+sed -i 's/#user www-data/user nginx/' /etc/nginx/nginx.conf
+
+# Modify nginx.conf to listen on port 8080
+sed -i 's/80/8080/g' /etc/nginx/sites-available/default
+
+# Give nginx user ownership of necessary directories
+chown -R nginx:nginx /var/log/nginx
+chown -R nginx:nginx /var/lib/nginx
+
+# Ensure nginx can read its configuration files
+chmod 644 /etc/nginx/nginx.conf
+
+# Update nginx to run as nginx user
+sed -i 's/user www-data/user nginx/' /etc/nginx/nginx.conf
+
+# Ensure nginx is not running
+pkill nginx
+
+# Start nginx service
+sudo -u nginx service nginx start
+
+# Verify nginx is running as nginx user
+ps auxff | grep nginx
