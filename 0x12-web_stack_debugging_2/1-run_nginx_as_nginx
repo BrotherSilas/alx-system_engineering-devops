@@ -24,4 +24,4 @@ pkill nginx
 sudo -u nginx service nginx start
 
 # Verify nginx is running as nginx user
-ps auxff | grep nginx
+ps auxff | pgrep nginx
