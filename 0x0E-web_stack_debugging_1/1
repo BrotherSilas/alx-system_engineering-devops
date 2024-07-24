@@ -1,0 +1,6 @@
+./0-nginx_likes_port_80: line 3: netstat: command not found
+Fixing Nginx to listen on port 80...
+System has not been booted with systemd as init system (PID 1). Can't operate.
+Failed to connect to bus: Host is down
+./0-nginx_likes_port_80: line 17: netstat: command not found
+Failed in making Nginx listen on port 80
