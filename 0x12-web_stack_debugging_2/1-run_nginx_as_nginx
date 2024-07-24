@@ -24,7 +24,7 @@ pkill nginx
 sudo -u nginx service nginx start
 
 # Verify nginx is running as nginx user
-ps auxff | grep ngin[x]
+ps auxff |pgrep ngin[x]
 
 # Check if port 8080 is open
 nc -z 0 8080 ; echo $?
