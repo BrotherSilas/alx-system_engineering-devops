@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # Short and sweet bash script to fix Nginx port issue
 sed -i 's/listen 8080/listen 80/' /etc/nginx/sites-available/default
-service nginx start
-nc -z -v 0.0.0.0 80
-pkill nginx
+service nginx restart
+
