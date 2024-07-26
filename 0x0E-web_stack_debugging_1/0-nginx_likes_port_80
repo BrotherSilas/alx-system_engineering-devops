@@ -5,25 +5,10 @@
 apt-get update
 
 apt-get install -y nginx
-# to replace any occurrence of "listen 8080" with "listen 80" in the default site configuration
-# Check if the script is run with sudo privileges
-if [ "$EUID" -ne 0 ]; then
-   echo "This script must be run as root or with sudo privileges"
-   exit 1
-fi
 
-# Use vi to replace all instances of "listen 8080" with "listen 80"
-vi -es /etc/nginx/sites-available/default <<-EOF
-:%s/listen 8080/listen 80/g
-:wq
-EOF
+# to replace any occurrence of "listen 8080" with "listen 80" in the default site configuration
+vi -c '%s/listen 8080/listen 80/g' -c 'wq' /etc/nginx/sites-available/default
+
 # Restart Nginx to apply the changes
 service nginx restart
 
-# Optional: Check if Nginx is running and listening on port 80
-if sudo netstat -tuln | grep :80 > /dev/null; then
-   echo "Nginx is now listening on port 80"
-else
-   echo "Nginx is not listening on port 80. Check logs for errors."
-   exit 1
-fi

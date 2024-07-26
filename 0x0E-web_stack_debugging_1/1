@@ -1,14 +1,19 @@
-Hit:1 http://security.ubuntu.com/ubuntu focal-security InRelease
-Hit:2 http://ppa.launchpad.net/brightbox/ruby-ng/ubuntu focal InRelease
-Hit:3 http://archive.ubuntu.com/ubuntu focal InRelease
-Hit:4 https://deb.nodesource.com/node_14.x focal InRelease
-Hit:5 http://archive.ubuntu.com/ubuntu focal-updates InRelease
-Hit:6 http://archive.ubuntu.com/ubuntu focal-backports InRelease
+Hit:1 http://archive.ubuntu.com/ubuntu focal InRelease
+Hit:2 http://archive.ubuntu.com/ubuntu focal-updates InRelease
+Hit:3 http://ppa.launchpad.net/brightbox/ruby-ng/ubuntu focal InRelease
+Hit:4 http://archive.ubuntu.com/ubuntu focal-backports InRelease
+Hit:5 https://deb.nodesource.com/node_14.x focal InRelease
+Hit:6 http://security.ubuntu.com/ubuntu focal-security InRelease
 Reading package lists...
 Reading package lists...
 Building dependency tree...
 Reading state information...
 nginx is already the newest version (1.18.0-0ubuntu1.5).
 0 upgraded, 0 newly installed, 0 to remove and 273 not upgraded.
- * Restarting nginx nginx
+Vim: Warning: Output is not to a terminal
+[?1049h[22;0;0t[>4;2m[?1h=[?2004h[1;38r[?12h[?12l[22;2t[22;1t[27m[23m[29m[m[H[2J[?25l[38;1H"/etc/nginx/sites-available/default"<nginx/sites-available/default" 91L, 2416C
+[1m[37m[41mError detected while processing command line:[m
+[1m[37m[41mE486: Pattern not found: listen 8080[?2004l[m
+"/etc/nginx/sites-available/default"<tes-available/default" 91L, 2416C written[23;2t[23;1t
+[?2004l[?1l>[?25h[>4;m[?1049l[23;0;0t * Restarting nginx nginx
    ...done.
