@@ -7,7 +7,7 @@ apt-get update
 apt-get install -y nginx
 
 # to replace any occurrence of "listen 8080" with "listen 80" in the default site configuration
-sed -i 's/listen 8080/listen 80/' /etc/nginx/sites-available/default
+vi -c '%s/listen 8080/listen 80/g' -c 'wq' /etc/nginx/sites-available/default
 
 # Restart Nginx to apply the changes
 service nginx restart

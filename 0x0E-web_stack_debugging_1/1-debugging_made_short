@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 # Short and sweet bash script to fix Nginx port issue
-sed -i 's/listen 8080/listen 80/' /etc/nginx/sites-available/default
+vi -c '%s/listen 8080/listen 80/g' -c 'wq' /etc/nginx/sites-available/default
 service nginx restart
 
