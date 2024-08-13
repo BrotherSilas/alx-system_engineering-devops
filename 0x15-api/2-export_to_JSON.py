@@ -11,7 +11,7 @@ import sys
 
 def get_employee_todo_data(employee_id):
     """
-    Retrieves TODO list data for a given employee ID and exports it to a JSON file.
+    Gets TODO list data for a given employee ID and exports it to a JSON file.
     """
     base_url = "https://jsonplaceholder.typicode.com"
     user_url = f"{base_url}/users/{employee_id}"
