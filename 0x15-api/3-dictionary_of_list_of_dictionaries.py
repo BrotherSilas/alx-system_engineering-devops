@@ -31,7 +31,10 @@ def get_all_employees_todo_data():
         for user in users_data:
             user_id = str(user['id'])
             username = user['username']
-            user_todos = [todo for todo in todos_data if todo['userId'] == user['id']]
+            user_todos = [
+                    todo for todo in todos_data
+                    if todo['userId'] == user['id']
+                    ]
 
             all_employees_data[user_id] = [
                 {
