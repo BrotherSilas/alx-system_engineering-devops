@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-This script gets information about an employee's to-do list using a REST API and displays the progress status.
+This script returns an employee's to-do list progress using a REST API.
 """
 
 import requests
@@ -19,24 +19,28 @@ def get_employee_task_status(employee_id):
         # Get employee information
         user_info = requests.get(user_url)
         user_data = user_info.json()
-        employee_name = user_data.get("name")
+        EMPLOYEE_NAME = user_data.get("name")
 
         # Get TODO list for the employee
         todos_response = requests.get(todos_url)
         todos_list = todos_response.json()
 
         # Determine progress
-        total_number_of_tasks = len(todos_list)
-        number_of_done_tasks = sum(1 for todo in todos_list if todo.get("completed"))
+        TOTAL_NUMBER_OF_TASKS = len(todos_list)
+        NUMBER_OF_DONE_TASKS = sum(
+            1 for todo in todos_list
+            if todo.get("completed")
+            )
 
         # Display progress
-        print(f"Employee {employee_name} is done with tasks"
-              f"({number_of_done_tasks}/{total_number_of_tasks}):")
+        print(f"Employee {EMPLOYEE_NAME} is done with tasks"
+              f"({NUMBER_OF_DONE_TASKS}/{TOTAL_NUMBER_OF_TASKS}):")
 
         # Display completed tasks
         for todo in todos_list:
             if todo.get("completed"):
-                print(f"\t {todo.get('title')}")
+                TASK_TITLE = todo.get('title')
+                print(f"\t {TASK_TITLE}")
 
     except requests.RequestException as e:
         print(f"Error: {e}")

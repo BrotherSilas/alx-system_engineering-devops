@@ -11,7 +11,7 @@ import sys
 
 def get_employee_task_status(user_id):
     """
-    Gets TODO list information for a given employee ID and exports it to a CSV file.
+    Gets TODO list info for a given employee ID and exports it to a CSV file.
     """
     main_url = "https://jsonplaceholder.typicode.com"
     user_url = f"{main_url}/users/{user_id}"
