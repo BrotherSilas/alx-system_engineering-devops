@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Module for recursively querying the Reddit API and returning hot article titles.
+Module for recursively querying the Reddit API and returning article titles.
 """
 import requests
 
@@ -12,7 +12,7 @@ def recurse(subreddit, hot_list=[], after=None):
 
     Args:
         subreddit (str): The name of the subreddit to query.
-        hot_list (list): A list to store the hot article titles (default is []).
+        hot_list (list): A list to store the article titles (default is []).
         after (str): A token for pagination (default is None).
 
     Returns:
@@ -20,11 +20,17 @@ def recurse(subreddit, hot_list=[], after=None):
     """
     # Set up the API request
     url = f"https://www.reddit.com/r/{subreddit}/hot.json"
-    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"}
+    headers = {
+        "User-Agent": (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+            "(KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+        )
+    }
     params = {"limit": 100, "after": after}
 
     # Send the request
-    response = requests.get(url, headers=headers, params=params, allow_redirects=False)
+    response = requests.get(url, headers=headers,
+                            params=params, allow_redirects=False)
 
     # Check if the subreddit is valid
     if response.status_code != 200:
@@ -32,7 +38,7 @@ def recurse(subreddit, hot_list=[], after=None):
 
     # Parse the response
     data = response.json()["data"]
-    
+
     # Add titles to the hot_list
     for post in data["children"]:
         hot_list.append(post["data"]["title"])
@@ -46,5 +52,5 @@ def recurse(subreddit, hot_list=[], after=None):
         return hot_list
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     print(recurse("programming"))

@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Module for counting occurrences of keywords in hot article titles of a subreddit.
+Module for counting occurrences of keywords in article titles of a subreddit.
 """
 import requests
 
@@ -14,7 +14,7 @@ def count_words(subreddit, word_list, after=None, word_count={}):
         subreddit (str): The name of the subreddit to query.
         word_list (list): A list of keywords to count.
         after (str): A token for pagination (default is None).
-        word_count (dict): A dictionary to store the word counts (default is {}).
+        word_count (dict): A dictionary to store word counts (default is {}).
 
     Returns:
         None
@@ -25,7 +25,8 @@ def count_words(subreddit, word_list, after=None, word_count={}):
     params = {"limit": 100, "after": after}
 
     # Send the request
-    response = requests.get(url, headers=headers, params=params, allow_redirects=False)
+    response = requests.get(
+            url, headers=headers, params=params, allow_redirects=False)
 
     # Check if the subreddit is valid
     if response.status_code != 200:
@@ -62,6 +63,8 @@ if __name__ == '__main__':
     import sys
     if len(sys.argv) < 3:
         print("Usage: {} <subreddit> <list of keywords>".format(sys.argv[0]))
-        print("Ex: {} programming 'python java javascript'".format(sys.argv[0]))
+        print(
+             "Ex: {} programming 'python java javascript'".format(sys.argv[0])
+                )
     else:
         count_words(sys.argv[1], [x for x in sys.argv[2].split()])
