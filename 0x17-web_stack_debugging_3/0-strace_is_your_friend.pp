@@ -1,4 +1,3 @@
-# 0-strace_is_your_friend.pp
 # Fixes the Apache 500 error by using sed to replace all instances of 'phpp' with 'php'
 
 exec { 'fix-wordpress':
