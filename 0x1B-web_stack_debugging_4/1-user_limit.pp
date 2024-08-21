@@ -1,8 +1,15 @@
 # This Puppet manifest increases the file descriptor limit for the user
 # Changes os configuration for holberton user
 
-exec { 'change-configuration-for-user':
-  command => 'echo "holberton soft nofile 4096" >> /etc/security/limits.conf && echo "holberton hard nofile 8192" >> /etc/security/limits.conf',
-  path    => '/usr/local/bin:/usr/bin:/bin/',
+file_line { 'set-soft-nofile-limit-for-holberton':
+  path  => '/etc/security/limits.conf',
+  line  => 'holberton soft nofile 4096',
+  match => '^holberton\s+soft\s+nofile',
+}
+
+file_line { 'set-hard-nofile-limit-for-holberton':
+  path  => '/etc/security/limits.conf',
+  line  => 'holberton hard nofile 8192',
+  match => '^holberton\s+hard\s+nofile',
 }
 
