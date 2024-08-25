@@ -1,20 +1,24 @@
-# This Puppet manifest fixes the Nginx performance issue by increasing the number of worker processes
+# This Puppet manifest fixes the Nginx performance issue by increasing 
+# the number of worker processes to auto
 # and the maximum number of open files.
 
-exec { 'nginx-worker-processes-increase':
-  command => 'sed -i "s/worker_processes 4/worker_processes auto/g" /etc/nginx/nginx.conf',
-  path    => '/usr/local/bin:/usr/bin:/bin/',
-  notify  => Service['nginx'],
+exec { 'fix-for-nginx':
+  command => "sed -i '/worker_processes/s/[0-9]+/auto/' /etc/nginx/nginx.conf /etc/nginx/sites-available/default",
+  path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+  onlyif  => 'test -f /etc/nginx/nginx.conf || test -f /etc/nginx/sites-available/default',
 }
 
-exec { 'max-open-files-increase':
-  command => 'sed -i "s/worker_rlimit_nofile 768/worker_rlimit_nofile 65536/g" /etc/nginx/nginx.conf',
-  path    => '/usr/local/bin:/usr/bin:/bin/',
-  notify  => Service['nginx'],
+# Increase the ULIMIT
+exec { 'increase-ulimit':
+  command => 'sed -i "/^ULIMIT=/c\ULIMIT=\'-n 65536\'" /etc/default/nginx',
+  path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+  onlyif  => 'test -f /etc/default/nginx',
 }
 
-service { 'nginx':
-  ensure => running,
-  enable => true,
+# Restart Nginx to apply changes
+exec { 'nginx-restart':
+  command => '/etc/init.d/nginx restart || service nginx restart || systemctl restart nginx',
+  path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+  require => [Exec['fix-for-nginx'], Exec['increase-ulimit']],
 }
 
